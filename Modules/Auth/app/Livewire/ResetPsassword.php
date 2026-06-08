@@ -21,7 +21,7 @@ class ResetPsassword extends Component
     #[Rule('required|min:6|confirmed')]
     public $password;
     public $password_confirmation;
-    public function mount($token)
+    public function mount($token): void
     {
         $this->token = $token;
     }
