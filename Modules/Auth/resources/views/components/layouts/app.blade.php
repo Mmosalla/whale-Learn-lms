@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 
 <head>
-    <title>ورود</title>
+    <title>{{$title ?? "پنل مدیریت"}}</title>
 
     <!-- Meta Tags -->
     <meta charset="utf-8">

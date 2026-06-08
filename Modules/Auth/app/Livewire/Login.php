@@ -6,7 +6,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
-use Modules\User\app\Models\User;
+use Modules\User\Models\User;
+
 
 class Login extends Component
 {
