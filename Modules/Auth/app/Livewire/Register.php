@@ -2,12 +2,13 @@
 
 namespace Modules\Auth\Livewire;
 
-use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Modules\User\app\Models\User;
 
 class Register extends Component
 {
@@ -24,7 +25,7 @@ class Register extends Component
         'password_confirmation' => 'required',
     ] ;
 
-    public function RegisterUser(): void
+    public function RegisterUser()
     {
         $this->validate();
 
@@ -35,7 +36,8 @@ class Register extends Component
         ]);
 
         Auth::login($user);
-
+        event(new Registered($user));
+        return redirect()->route('verification.notice');
 
     }
     #[Layout('auth::components.layouts.app')]

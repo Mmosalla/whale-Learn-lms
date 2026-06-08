@@ -1,3 +1,5 @@
 {
-    "Auth": true
+    "Auth": true,
+    "Panel": true,
+    "User": true
 }

@@ -15,7 +15,7 @@
                                     <label for="exampleInputEmail1" class="form-label">نام *</label>
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="bi bi-envelope-fill"></i></span>
-                                        <input wire:model="name" type="text" class="form-control border-0 bg-light rounded-end ps-1" placeholder="Ali" id="exampleInputEmail1">
+                                        <input wire:model="name" type="text" class="form-control border-0 bg-light rounded-end ps-1" placeholder="Ali" id="exampleInputName">
                                     </div>
                                     @error('name') <span class="text-danger">{{$message}}</span>  @enderror
                                 </div>
