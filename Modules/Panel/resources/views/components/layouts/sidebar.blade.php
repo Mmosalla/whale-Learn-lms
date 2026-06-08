@@ -2,8 +2,8 @@
 
     <!-- Navbar brand for xl START -->
     <div class="d-flex align-items-center">
-        <a class="navbar-brand" href="index.html">
-            <img class="navbar-brand-item" src="assets/images/logo-light.svg" alt="">
+        <a class="navbar-brand" href="{{route('dashboard')}}">
+            <img class="navbar-brand-item" src="{{url('assets/images/logo-light.svg')}}" alt="whale">
         </a>
     </div>
     <!-- Navbar brand for xl END -->
@@ -14,8 +14,17 @@
             <!-- Sidebar menu START -->
             <ul class="navbar-nav flex-column" id="navbar-sidebar">
 
-                <!-- Menu item 1 -->
-                <li class="nav-item"><a href="admin-dashboard.html" class="nav-link active"><i class="bi bi-house fa-fw me-2"></i>داشبورد</a></li>
+                <!-- Menu item  -->
+
+                <li class="nav-item">
+                    <a href="{{route('dashboard')}}" class="nav-link active">
+                        <i class="bi bi-house fa-fw me-2"></i>داشبورد</a>
+                </li>
+                <li class="nav-item">
+                    <a  href="{{route('category')}}" class="nav-link active">
+                        <i class="bi bi-basket fa-fw me-2"></i>دسته بندی</a>
+                </li>
+
 
             </ul>
             <!-- Sidebar menu end -->
