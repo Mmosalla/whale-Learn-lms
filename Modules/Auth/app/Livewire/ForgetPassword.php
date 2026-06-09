@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Password;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Modules\User\Models\User;
+use Modules\User\app\Models\User;
 
 
 class ForgetPassword extends Component

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
-use Modules\User\Models\User;
+use Modules\User\app\Models\User;
 
 class Register extends Component
 {
