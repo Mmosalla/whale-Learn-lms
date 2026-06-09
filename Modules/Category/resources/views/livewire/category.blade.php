@@ -6,11 +6,13 @@
             class="col-12 mt-5 d-sm-flex justify-content-between align-items-center"
         >
             <div class="card-body">
-                <form wire:submit.prevent="createCategory" class="row g-4">
+                <form class="row g-4">
                     <!-- Input item -->
                     <div class="col-6">
                         <label class="form-label">عنوان دسته بندی</label>
                         <input wire:model="title" type="text" class="form-control"/>
+                        @error('title') <span class="text-danger">{{$message}}</span>  @enderror
+
                     </div>
 
                     <!-- Choice item -->
@@ -28,9 +30,17 @@
                         </select>
                     </div>
                     <div class="d-sm-flex justify-content-start">
-                        <button type="submit" class="btn btn-primary mb-0">
-                            افزودن دسته بندی
-                        </button>
+                        @if($editIndex)
+                            <button wire:click.prevent="updateRow" type="button" class="btn btn-warning mb-0">
+                                ویراش دسته بندی
+                            </button>
+                        @else
+                            <button wire:click.prevent="createRow" type="button" class="btn btn-primary mb-0">
+                                افزودن دسته بندی
+                            </button>
+                        @endif
+
+
                     </div>
                 </form>
             </div>
@@ -100,14 +110,13 @@
                                 </div>
                             </td>
                             <td>{{\Hekmatinasser\Verta\Facades\Verta::instance($category->creted_at)}}</td>
-                            \
+
                             <td>
-                                <a
-                                    href="#"
-                                    class="btn btn-sm btn-success me-1 mb-1 mb-md-0"
-                                >ویرایش</a
-                                >
-                                <button class="btn btn-sm btn-danger mb-0">حذف</button>
+                                <a href="#" wire:click.prevent="editRow({{$category->id}})"
+                                   class="btn btn-sm btn-success me-1 mb-1 mb-md-0">ویرایش</a>
+                                <button wire:click="$dispatch('delete_row' , { 'id' : {{$category->id}} })"
+                                        class="btn btn-sm btn-danger mb-0">حذف
+                                </button>
                             </td>
                         </tr>
                     @endforeach
@@ -130,3 +139,73 @@
     </div>
     <!-- Card END -->
 </div>
+
+
+@push('scripts')
+    <script>
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('delete_row', (event) => {
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: "btn btn-success",
+                        cancelButton: "btn btn-danger"
+                    },
+                    buttonsStyling: false
+                });
+                swalWithBootstrapButtons.fire({
+                    title: "آیا حذف را تایید میکنید؟",
+                    icon: "warning",
+                    background: "dark",
+                    showCancelButton: true,
+                    confirmButtonText: "بله",
+                    cancelButtonText: "خیر",
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.dispatch('destroy_row', {id: event.id})
+                        swalWithBootstrapButtons.fire({
+                            title: "حذف با موفقیت انجام شد!",
+                            icon: "success"
+                        });
+                    } else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire({
+                            title: "حذف  لغو شد",
+                            icon: "error"
+                        });
+                    }
+                });
+            })
+            Livewire.on('create_row', (event) => {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'bottom',
+                    showConfirmButton: false,
+                    timer: 2500,
+                    padding: '2em',
+                });
+                toast.fire({
+                    icon: 'success',
+                    title: 'با موفقیت ساخته شد',
+                    padding: '2em',
+                });
+            })
+            Livewire.on('update_row', (event) => {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'bottom',
+                    showConfirmButton: false,
+                    timer: 2500,
+                    padding: '3em',
+                });
+                toast.fire({
+                    icon: 'success',
+                    title: 'با موفقیت ویراش شد',
+                    padding: '2em',
+                });
+            })
+        })
+    </script>
+@endpush

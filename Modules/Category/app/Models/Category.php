@@ -36,4 +36,15 @@ class Category extends Model
     // {
     //     // return CategoryFactory::new();
     // }
+
+
+    protected static function boot()
+    {
+        parent::boot();
+        Category::deleting(function ($category) {
+            foreach ($category->child()->get() as $child) {
+                $child->update(['parent_id' => 0]);
+            }
+        });
+    }
 }

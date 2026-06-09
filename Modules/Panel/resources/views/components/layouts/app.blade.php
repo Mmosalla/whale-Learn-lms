@@ -81,7 +81,9 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{{url('assets/css/style-rtl.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url('assets/css/sweetalert.css')}}">
 
+    @stack('styles')
 </head>
 
 <body>
@@ -123,7 +125,8 @@
 
 <!-- Template Functions -->
 <script src="{{url('assets/js/functions.js')}}"></script>
-
+<script src="{{url('assets/js/sweetalert.min.js')}}"></script>
+@stack('scripts')
 
 </body>
 
