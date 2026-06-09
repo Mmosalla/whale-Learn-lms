@@ -3,75 +3,66 @@
 namespace Modules\RolePermissions\Livewire;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Spatie\Permission\Models\Permission;
 
 class Permissions extends Component
 {
     use WithPagination;
 
     public $editIndex = null;
-    public $title;
-    public $parent_id = 0;
-
+    #[Validate('required|unique:permissions,name')]
+    public $name;
     protected $paginationTheme = 'bootstrap';
 
 
 
     #[Computed]
-    public function categories()
+    public function permissions(): LengthAwarePaginator
     {
-        return \Modules\Category\app\Models\Category::query()
-            ->with('parent')
+        return Permission::query()
             ->paginate(6);
 
     }
 
-    protected function rules(): array
-    {
-        return [
-            'title' => 'required',
-            'parent_id' => 'nullable',
 
-        ];
-    }
 
     public function createRow(): void
     {
 
         $this->validate();
-        \Modules\Category\app\Models\Category::query()->create([
-            'title' => $this->title,
-            'slug' => make_slug($this->title),
-            'parent_id' => $this->parent_id,
+      Permission::query()->create([
+            'name' => $this->name,
         ]);
-        $this->reset('title', 'parent_id');
+        $this->reset('name');
         $this->dispatch('create_row');
     }
 
     public function editRow($id): void
     {
         $this->editIndex = $id;
-        $category = \Modules\Category\app\Models\Category::query()->findOrFail($id);
-        $this->parent_id = $category->parent_id;
-        $this->title = $category->title;
+        $permission = Permission::query()->findOrFail($id);
+        $this->name = $permission->name;
     }
 
     public function updateRow(): void
     {
-        $this->validate();
-        \Modules\Category\app\Models\Category::query()
+        $this->validate([
+            'name' => 'required|unique:permissions,name,' . $this->editIndex,
+        ]);
+        Permission::query()
             ->find($this->editIndex)
             ->update([
-                'title' => $this->title,
-                'slug' => make_slug($this->title),
-                'parent_id' => $this->parent_id,
+                'name' => $this->name,
             ]);
-        $this->reset('title', 'parent_id');
+        $this->reset('name');
         $this->dispatch('update_row');
         $this->editIndex = null;
     }
@@ -79,7 +70,7 @@ class Permissions extends Component
     #[On('destroy_row')]
     public function destroy_row($id): void
     {
-        \Modules\Category\app\Models\Category::destroy($id);
+       Permission::destroy($id);
         $this->editIndex = null;
     }
 

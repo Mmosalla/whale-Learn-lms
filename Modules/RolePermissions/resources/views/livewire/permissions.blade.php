@@ -1,7 +1,7 @@
 <div class="page-content-wrapper border">
     <!-- Title -->
     <div class="row mb-3">
-        <h1 class="h3 mb-5 mb-sm-0 fs-5">دسته بندی</h1>
+        <h1 class="h3 mb-5 mb-sm-0 fs-5">مجوز ها</h1>
         <div
             class="col-12 mt-5 d-sm-flex justify-content-between align-items-center"
         >
@@ -9,34 +9,21 @@
                 <form class="row g-4">
                     <!-- Input item -->
                     <div class="col-6">
-                        <label class="form-label">عنوان دسته بندی</label>
-                        <input wire:model="title" type="text" class="form-control"/>
-                        @error('title') <span class="text-danger">{{$message}}</span>  @enderror
+                        <label class="form-label">عنوان مجوز</label>
+                        <input wire:model="name" type="text" class="form-control"/>
+                        @error('name') <span class="text-danger">{{$message}}</span>  @enderror
 
                     </div>
 
-                    <!-- Choice item -->
-                    <div class="col-lg-6">
-                        <label class="form-label">دسته پدر</label>
-                        <select
-                            class="form-select js-choice z-index-9 border-0 bg-light"
-                            aria-label=".form-select-sm"
-                            wire:model="parent_id"
-                        >
-                            <option value="0">دسته بندی اصلی</option>
-                            @foreach($parentCategories as $key=>$value)
-                                <option value="{{$key}}">{{$value}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+
                     <div class="d-sm-flex justify-content-start">
                         @if($editIndex)
                             <button wire:click.prevent="updateRow" type="button" class="btn btn-warning mb-0">
-                                ویراش دسته بندی
+                                ویراش مجوز
                             </button>
                         @else
                             <button wire:click.prevent="createRow" type="button" class="btn btn-primary mb-0">
-                                افزودن دسته بندی
+                                افزودن مجوز
                             </button>
                         @endif
 
@@ -66,7 +53,7 @@
                         <th scope="col" class="border-0 rounded-start align-items-center">
                             نام دسته بندی
                         </th>
-                        <th scope="col" class="border-0 align-items-center">دسته پدر</th>
+{{--                        <th scope="col" class="border-0 align-items-center">دسته پدر</th>--}}
                         <th scope="col" class="border-0 align-items-center">تاریخ ایجاد</th>
                         <th scope="col" class="border-0 rounded-end align-items-center">عملیات</th>
                     </tr>
@@ -75,7 +62,7 @@
                     <!-- Table body START -->
                     <tbody>
                     <!-- Table row -->
-                    @foreach($this->categories as $index=>$category )
+                    @foreach($this->permissions as $index=>$permission )
                         <tr>
                             <td>
                                 <div
@@ -84,7 +71,7 @@
                                     <!-- Title -->
                                     <h6 class="table-responsive-title mb-0 ms-2">
 
-                                        {{ $this->categories->firstItem() + $index}}
+                                        {{ $this->permissions->firstItem() + $index}}
                                     </h6>
                                 </div>
                             </td>
@@ -95,26 +82,26 @@
                                     <!-- Title -->
                                     <h6 class="table-responsive-title mb-0 ms-2">
 
-                                        {{$category->title}}
+                                        {{$permission->name}}
                                     </h6>
                                 </div>
                             </td>
-                            <td>
-                                <div
-                                    class="d-flex align-items-center position-relative"
-                                >
-                                    <!-- Title -->
-                                    <h6 class="table-responsive-title mb-0 ms-2">
-                                        {{$category->parent->title}}
-                                    </h6>
-                                </div>
-                            </td>
-                            <td>{{\Hekmatinasser\Verta\Facades\Verta::instance($category->creted_at)}}</td>
+{{--                            <td>--}}
+{{--                                <div--}}
+{{--                                    class="d-flex align-items-center position-relative"--}}
+{{--                                >--}}
+{{--                                    <!-- Title -->--}}
+{{--                                    <h6 class="table-responsive-title mb-0 ms-2">--}}
+{{--                                        {{$category->parent->title}}--}}
+{{--                                    </h6>--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+                            <td>{{\Hekmatinasser\Verta\Facades\Verta::instance($permission->creted_at)}}</td>
 
                             <td>
-                                <a href="#" wire:click.prevent="editRow({{$category->id}})"
+                                <a href="#" wire:click.prevent="editRow({{$permission->id}})"
                                    class="btn btn-sm btn-success me-1 mb-1 mb-md-0">ویرایش</a>
-                                <button wire:click="$dispatch('delete_row' , { 'id' : {{$category->id}} })"
+                                <button wire:click="$dispatch('delete_row' , { 'id' : {{$permission->id}} })"
                                         class="btn btn-sm btn-danger mb-0">حذف
                                 </button>
                             </td>
@@ -132,7 +119,7 @@
         <!-- Card footer START -->
         <div class="card-footer bg-transparent pt-0">
             <!-- Pagination START -->
-            {{$this->categories->links('vendor.livewire.admin-new-bootstrap')}}
+            {{$this->permissions->links('vendor.livewire.admin-new-bootstrap')}}
             <!-- Pagination END -->
         </div>
         <!-- Card footer END -->
