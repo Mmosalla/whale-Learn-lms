@@ -6,74 +6,74 @@ use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class Roles extends Component
 {
     use WithPagination;
 
-    public $editIndex = null;
-    #[Validate('required|unique:roles,name')]
+    #[Rule('required')]
     public $name;
+    public $editedIndex;
+    public $user_permissions=[];
     protected $paginationTheme = 'bootstrap';
 
-
-    #[Computed]
-    public function roles()
+    public function createRole(): void
     {
-        return Role::query()
-            ->paginate(6);
-
-    }
-
-
-    public function createRow(): void
-    {
-
         $this->validate();
-        Role::query()->create([
+        $role = Role::query()->create([
             'name' => $this->name,
         ]);
+
+        $role->syncPermissions($this->user_permissions);
+
         $this->reset('name');
-        $this->dispatch('create_row');
+        session()->flash('message', 'نقش ایجاد شد');
     }
 
-    public function editRow($id): void
+    public function editRow($id)
     {
-        $this->editIndex = $id;
-        $role = Role::query()->findOrFail($id);
+        $role = Role::query()->find($id);
+        foreach ($role->permissions as $permission) {
+            $this->user_permissions[] = $permission->name;
+        }
         $this->name = $role->name;
+        $this->editedIndex=$id;
     }
 
-    public function updateRow(): void
+    public function updateRow()
     {
         $this->validate();
-       Role::query()
-            ->find($this->editIndex)
-            ->update([
-                'name' => $this->name,
+        $role =  Role::query()->find($this->editedIndex);
+        $role->update([
+            'name' => $this->name,
+        ]);
 
-            ]);
-        $this->reset('title', 'parent_id');
-        $this->dispatch('update_row');
-        $this->editIndex = null;
+        $role->syncPermissions($this->user_permissions);
+        $this->user_permissions=[];
+        $this->reset('name');
+        session()->flash('message', 'نقش ویرایش شد');
+        $this->editedIndex=null;
     }
 
-    #[On('destroy_row')]
-    public function destroy_row($id): void
+    #[On('destroy-role')]
+    public function destroyRole($id)
     {
         Role::destroy($id);
-        $this->editIndex = null;
     }
 
     #[Layout('panel::components.layouts.app'), Title('نقش ها')]
     public function render(): view
     {
-        return view('rolepermissions::livewire.roles');
+        $permissions = Permission::query()->pluck('name');
+        $roles = Role::query()->with('permissions')->paginate(10);
+        return view('rolepermissions::livewire.roles' ,compact('roles','permissions'));
     }
 }
 

@@ -1,35 +1,38 @@
 <div class="page-content-wrapper border">
-    <!-- Title -->
     <div class="row mb-3">
-        <h1 class="h3 mb-5 mb-sm-0 fs-5">نقش ها</h1>
-        <div
-            class="col-12 mt-5 d-sm-flex justify-content-between align-items-center"
-        >
+        <h1 class="h3 mb-5 mb-sm-0 fs-5 ">نقش ها</h1>
+        <div class="col-12 mt-5 d-sm-flex justify-content-between align-items-center">
             <div class="card-body">
                 <form class="row g-4">
                     <!-- Input item -->
                     <div class="col-6">
                         <label class="form-label">عنوان نقش</label>
-                        <input wire:model="name" type="text" class="form-control"/>
-                        @error('name') <span class="text-danger">{{$message}}</span>  @enderror
-
+                        <input wire:model="name" type="text" class="form-control">
+                        @error('name')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-
-                    <div class="d-sm-flex justify-content-start">
-                        @if($editIndex)
-                            <button wire:click.prevent="updateRow" type="button" class="btn btn-warning mb-0">
-                                ویراش نقش
-                            </button>
+                    <div class="col-6" style="padding-top: 1.8rem;">
+                        @if($editedIndex)
+                            <button type="button" class="btn btn-warning-shadow mb-0" wire:click="updateRow">ویرایش</button>
                         @else
-                            <button wire:click.prevent="createRow" type="button" class="btn btn-primary mb-0">
-                                افزودن نقش
-                            </button>
+                            <button type="button" class="btn btn-primary" wire:click="createRole">ثبت</button>
                         @endif
-
-
                     </div>
                 </form>
             </div>
+        </div>
+        <div class="col-12 mt-5 d-sm-flex justify-content-start align-items-center">
+            @foreach($permissions as $permission)
+                <div class="col-2">
+                    <div class="d-flex gap-3 align-items-center">
+                        <label for="" class="form-label">{{$permission}} </label>
+                        <input type="checkbox" class="form-check" wire:model="user_permissions" value="{{$permission}}">
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 
@@ -40,70 +43,45 @@
             <!-- Course table START -->
             <div class="table-responsive border-0 rounded-3">
                 <!-- Table START -->
-                <table
-                    class="table table-dark-gray align-middle p-4 mb-0 table-hover"
-                >
+                <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
                     <!-- Table head -->
                     <thead>
                     <tr>
-                        <th scope="col" class="border-0 align-items-center ">
-                            ردیف
-                        </th>
-                        <th scope="col" class="border-0 rounded-start align-items-center">
-                            نام نقش
-                        </th>
-                        <th scope="col" class="border-0 align-items-center">مجوز ها</th>
-                        <th scope="col" class="border-0 align-items-center">تاریخ ایجاد</th>
-                        <th scope="col" class="border-0 rounded-end align-items-center">عملیات</th>
+                        <th scope="col" class="border-0 rounded-start">نام نقش</th>
+                        <th scope="col" class="border-0">مجوزها</th>
+                        <th scope="col" class="border-0">تاریخ ایجاد</th>
+                        <th scope="col" class="border-0 rounded-end">عملیات</th>
                     </tr>
                     </thead>
-
                     <!-- Table body START -->
                     <tbody>
-                    <!-- Table row -->
-                    @foreach($this->roles as $index=>$role )
+                    @foreach($roles as $index=>$role)
                         <tr>
+                            <!-- Table data -->
                             <td>
-                                <div
-                                    class="d-flex align-items-center position-relative"
-                                >
+                                <div class="d-flex align-items-center position-relative">
                                     <!-- Title -->
                                     <h6 class="table-responsive-title mb-0 ms-2">
-
-                                        {{ $this->roles->firstItem() + $index}}
+                                        <a href="#" class="stretched-link">{{$role->name}}</a>
                                     </h6>
                                 </div>
                             </td>
+                            <!-- Table data -->
                             <td>
-                                <div
-                                    class="d-flex align-items-center position-relative"
-                                >
-                                    <!-- Title -->
-                                    <h6 class="table-responsive-title mb-0 ms-2">
-
-                                        {{$role->name}}
-                                    </h6>
-                                </div>
+                                <ul>
+                                    @foreach($role->permissions as $permission)
+                                        <li>{{$permission->name}}</li>
+                                    @endforeach
+                                </ul>
                             </td>
+                            <td> {{ \Hekmatinasser\Verta\Verta::instance($role->created_at)->format('%B %d، %Y') }}</td>
                             <td>
-                                <div
-                                    class="d-flex align-items-center position-relative"
-                                >
-                                    <a href="#"
-                                       class="btn btn-sm btn-orange me-1 mb-1 mb-md-0">ویرایش</a>
-                                </div>
-                            </td>
-                            <td>{{\Hekmatinasser\Verta\Facades\Verta::instance($role->creted_at)}}</td>
-
-                            <td>
-                                <a href="#" wire:click.prevent="editRow({{$role->id}})"
-                                   class="btn btn-sm btn-success me-1 mb-1 mb-md-0">ویرایش</a>
-                                <button wire:click="$dispatch('delete_row' , { 'id' : {{$role->id}} })"
-                                        class="btn btn-sm btn-danger mb-0">حذف
-                                </button>
+                                <a href="#" class="btn btn-sm btn-warning me-1 mb-1 mb-md-0" wire:click="editRow({{$role->id}})">ویرایش</a>
+                                <button class="btn btn-sm btn-danger mb-0" wire:click="$dispatch('delete-role',{id:{{$role->id}} })">حذف</button>
                             </td>
                         </tr>
                     @endforeach
+
                     </tbody>
                     <!-- Table body END -->
                 </table>
@@ -112,87 +90,42 @@
             <!-- Course table END -->
         </div>
         <!-- Card body END -->
-
         <!-- Card footer START -->
         <div class="card-footer bg-transparent pt-0">
             <!-- Pagination START -->
-            {{$this->roles->links('vendor.livewire.admin-new-bootstrap')}}
+
+            <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                {{$roles->links('vendor.livewire.admin-new-bootstrap')}}
+            </div>
             <!-- Pagination END -->
         </div>
         <!-- Card footer END -->
     </div>
     <!-- Card END -->
 </div>
-
-
 @push('scripts')
     <script>
         document.addEventListener('livewire:init', () => {
-            Livewire.on('delete_row', (event) => {
-                const swalWithBootstrapButtons = Swal.mixin({
-                    customClass: {
-                        confirmButton: "btn btn-success",
-                        cancelButton: "btn btn-danger"
-                    },
-                    buttonsStyling: false
-                });
-                swalWithBootstrapButtons.fire({
-                    title: "آیا حذف را تایید میکنید؟",
+            Livewire.on('delete-role', (event) => {
+                Swal.fire({
+                    title: "آیا از حذف مطمئن هستید؟",
                     icon: "warning",
-                    background: "dark",
                     showCancelButton: true,
-                    confirmButtonText: "بله",
-                    cancelButtonText: "خیر",
-                    reverseButtons: true
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "بله!",
+                    cancelButtonText:"خیر"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Livewire.dispatch('destroy_row', {id: event.id})
-                        swalWithBootstrapButtons.fire({
-                            title: "حذف با موفقیت انجام شد!",
+                        Livewire.dispatch('destroy-role',{id:event.id})
+                        Swal.fire({
+                            title: "حذف انجام شد!",
                             icon: "success"
-                        });
-                    } else if (
-                        /* Read more about handling dismissals below */
-                        result.dismiss === Swal.DismissReason.cancel
-                    ) {
-                        swalWithBootstrapButtons.fire({
-                            title: "حذف  لغو شد",
-                            icon: "error"
                         });
                     }
                 });
-            })
-            Livewire.on('create_row', (event) => {
-                const toast = window.Swal.mixin({
-                    toast: true,
-                    position: 'bottom',
-                    showConfirmButton: false,
-                    timer: 2500,
-                    padding: '2em',
-                });
-                toast.fire({
-                    icon: 'success',
-                    title: 'با موفقیت ساخته شد',
-                    padding: '2em',
-                });
-            })
-            Livewire.on('update_row', (event) => {
-                const toast = window.Swal.mixin({
-                    toast: true,
-                    position: 'bottom',
-                    showConfirmButton: false,
-                    timer: 2500,
-                    padding: '3em',
-                });
-                toast.fire({
-                    icon: 'success',
-                    title: 'با موفقیت ویراش شد',
-                    padding: '2em',
-                });
-            })
-        })
+            });
+        });
     </script>
 @endpush
 
-
-{{--// Mohsen was here mmosalla36@gmail.com😎--}}
