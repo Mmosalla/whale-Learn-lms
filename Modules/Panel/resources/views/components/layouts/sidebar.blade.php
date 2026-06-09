@@ -24,6 +24,14 @@
                     <a  href="{{route('category')}}" class="nav-link active">
                         <i class="bi bi-basket fa-fw me-2"></i>دسته بندی</a>
                 </li>
+                <li class="nav-item">
+                    <a  href="{{route('roles')}}" class="nav-link active">
+                        <i class="bi bi-file-earmark-check-fill fa-fw me-2"></i>نقش ها</a>
+                </li>
+                <li class="nav-item">
+                    <a  href="{{route('permissions')}}" class="nav-link active">
+                        <i class="bi bi-hand-index fa-fw me-2"></i>مجوز ها</a>
+                </li>
 
 
             </ul>

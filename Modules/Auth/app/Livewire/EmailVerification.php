@@ -21,3 +21,5 @@ class EmailVerification extends Component
         return view('auth::livewire.email-verification');
     }
 }
+
+//Mohsen was here mmosalla36@gmail.com 😎
