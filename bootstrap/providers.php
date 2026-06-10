@@ -6,4 +6,5 @@ return [
     Modules\Panel\Providers\PanelServiceProvider::class,
     Modules\User\Providers\UserServiceProvider::class,
     Modules\Category\Providers\CategoryServiceProvider::class,
+    Modules\Course\Providers\CourseServiceProvider::class,
 ];
