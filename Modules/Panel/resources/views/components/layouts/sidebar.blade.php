@@ -32,6 +32,10 @@
                     <a  href="{{route('permissions')}}" class="nav-link active">
                         <i class="bi bi-hand-index fa-fw me-2"></i>مجوز ها</a>
                 </li>
+                <li class="nav-item">
+                    <a  href="{{route('admin.users')}}" class="nav-link active">
+                        <i class="bi bi-person fa-fw me-2"></i>کاربران</a>
+                </li>
 
 
             </ul>
