@@ -69,6 +69,31 @@
     </div>
 </nav>
 
+@push('scripts')
+    <script>
+
+        // Upload image
+        document.querySelector(".upload-button-image").onclick = function() {
+            document.querySelector(".hidden-upload-image").click();
+        };
+
+        document.querySelector(".hidden-upload-image").onchange = function() {
+            document.querySelector(".upload-name-image").value = event.target.files[0].name;
+        };
+
+        // Upload Video .mp4
+        document.querySelector(".upload-button-mp4").onclick = function() {
+            document.querySelector(".hidden-upload-mp4").click();
+        };
+
+        document.querySelector(".hidden-upload-mp4").onchange = function() {
+            document.querySelector(".upload-name-mp4").value = event.target.files[0].name;
+        };
+
+    </script>
+
+@endpush
+
 
 
 

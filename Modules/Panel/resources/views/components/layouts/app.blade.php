@@ -78,6 +78,7 @@
     <link rel="stylesheet" type="text/css" href="{{url('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('assets/vendor/apexcharts/css/apexcharts.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('assets/vendor/overlay-scrollbar/css/overlayscrollbars.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url('assets/vendor/choices/css/choices.min.css')}}">
 
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{{url('assets/css/style-rtl.css')}}">
@@ -121,11 +122,15 @@
 <!-- Vendors -->
 <script src="{{url('assets/vendor/purecounterjs/dist/purecounter_vanilla.js')}}"></script>
 <script src="{{url('assets/vendor/apexcharts/js/apexcharts.min.js')}}"></script>
+<script src="{{url('assets/vendor/choices/js/choices.min.js')}}"></script>
+<script src="{{url('assets/js/jquery.min.js')}}"></script>
+<script src="{{url('assets/js/ckeditor.js')}}"></script>
 <script src="{{url('assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.js')}}"></script>
 
 <!-- Template Functions -->
 <script src="{{url('assets/js/functions.js')}}"></script>
 <script src="{{url('assets/js/sweetalert.min.js')}}"></script>
+
 @stack('scripts')
 
 </body>

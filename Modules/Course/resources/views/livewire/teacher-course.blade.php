@@ -1,3 +1,4 @@
+@php use Modules\Course\app\Enums\CourseEnums; @endphp
 <div class="page-content-wrapper border">
 
     <div class="row mb-3">
@@ -6,7 +7,7 @@
 
             <div class="card-body">
                 <div class="d-sm-flex justify-content-start">
-                    <a href="#" class="btn btn-primary mb-0">افزودن دوره</a>
+                    <a href="{{route('admin.teacher.add_course`')}}" class="btn btn-primary mb-0">افزودن دوره</a>
                 </div>
             </div>
         </div>
@@ -55,14 +56,14 @@
                             </td>
                             <td>{{ \Hekmatinasser\Verta\Verta::instance($course->created_at)->format('%B %d، %Y') }}</td>
                             <td>
-                                @if($course->status === \Modules\Course\app\Enums\CourseStatus::Active->value)
+                                @if($course->status === CourseEnums::Active->value)
                                     <a href="#"
                                        class="btn btn-sm btn-success me-1 mb-1 mb-md-0">افزودن قسمت</a>
-                                @elseif($course->status == \Modules\Course\app\Enums\CourseStatus::Draft->value)
+                                @elseif($course->status == CourseEnums::Draft->value)
                                     <a href="#" class="btn btn-sm btn-info me-1 mb-1 mb-md-0">پیش نویس</a>
-                                @elseif($course->status == \Modules\Course\app\Enums\CourseStatus::Rejected->value)
+                                @elseif($course->status == CourseEnums::Rejected->value)
                                     <a href="#" class="btn btn-sm btn-danger me-1 mb-1 mb-md-0">رد شده</a>
-                                @elseif($course->status == \Modules\Course\app\Enums\CourseStatus::Archived->value)
+                                @elseif($course->status == CourseEnums::Archived->value)
                                     <a href="#" class="btn btn-sm btn-warning me-1 mb-1 mb-md-0">آرشیو</a>
                                 @endif
                             </td>
@@ -87,3 +88,27 @@
     </div>
 </div>
 
+
+@push('scripts')
+    <script>
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('courseAdded', (event) => {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'bottom',
+                    showConfirmButton: false,
+                    timer: 2500,
+                    padding: '2em',
+                });
+                toast.fire({
+                    icon: 'success',
+                    title: 'دوره با موقیت اضافه شد',
+                    padding: '2em',
+                });
+            })
+        })
+    </script>
+@endpush
+
+
+{{--Mohsen was here mmosalla36@gmail.com 😎--}}
