@@ -36,6 +36,10 @@
                     <a  href="{{route('admin.users')}}" class="nav-link active">
                         <i class="bi bi-person fa-fw me-2"></i>کاربران</a>
                 </li>
+                <li class="nav-item">
+                    <a  href="{{route('admin.courses')}}" class="nav-link active">
+                        <i class="bi bi-c-square fa-fw me-2"></i>دوره ها</a>
+                </li>
 
 
             </ul>
