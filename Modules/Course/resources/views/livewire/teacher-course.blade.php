@@ -57,7 +57,7 @@
                             <td>{{ \Hekmatinasser\Verta\Verta::instance($course->created_at)->format('%B %d، %Y') }}</td>
                             <td>
                                 @if($course->status === CourseEnums::Active->value)
-                                    <a href="#"
+                                    <a href="{{route('admin.course_detail' , $course->id)}}"
                                        class="btn btn-sm btn-success me-1 mb-1 mb-md-0">افزودن قسمت</a>
                                 @elseif($course->status == CourseEnums::Draft->value)
                                     <a href="#" class="btn btn-sm btn-info me-1 mb-1 mb-md-0">پیش نویس</a>

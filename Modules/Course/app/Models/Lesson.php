@@ -17,7 +17,7 @@ class Lesson extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'course_id',
+        'user_id',
         'season_id',
         'title',
         'e_title',
