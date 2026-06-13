@@ -20,7 +20,7 @@ class Courses extends Component
     public function chengStatusCourse($id): void
     {
         $course = Course::query()->findOrFail($id);
-        if ($course->status === CourseEnums::Default->value) {
+        if ($course->status === CourseEnums::Draft->value) {
             $course->update(['status' => CourseEnums::Active->value]);
             $this->dispatch('statusChanged');
         } else if ($course->status === CourseEnums::Active->value) {
@@ -30,7 +30,7 @@ class Courses extends Component
             $course->update(['status' => CourseEnums::Archived->value]);
             $this->dispatch('statusChanged');
         } else if ($course->status === CourseEnums::Archived->value) {
-            $course->update(['status' => CourseEnums::Default->value]);
+            $course->update(['status' => CourseEnums::Draft->value]);
             $this->dispatch('statusChanged');
         }
     }

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Modules\Course\Models\Course;
+use Modules\Course\Models\Lesson;
+use Modules\Course\Models\Season;
 use Spatie\Permission\Traits\HasRoles;
 
 
@@ -38,5 +40,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function courses()
     {
         return $this->hasMany(Course::class);
+    }
+
+    public function seasons()
+    {
+        return $this->hasMany(Season::class);
+    }
+
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class);
     }
 }

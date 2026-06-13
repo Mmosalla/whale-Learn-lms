@@ -27,7 +27,7 @@
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center position-relative">
-                                    {{$course->firstItem() + $index}}
+                                    {{$courses->firstItem() + $index}}
                                 </div>
                             </td>
                             <td>
@@ -54,12 +54,12 @@
 
                             <td>{{ Verta::instance($course->created_at)->format('%B %d، %Y') }}</td>
                             <td>
-                                @if($course->status === CourseEnums::Default->value)
+                                @if($course->status === CourseEnums::Draft->value)
                                     <a href="#" wire:click="chengStatusCourse({{$course->id}})"
                                        class="btn btn-sm btn-secondary me-1 mb-1 mb-md-0">پیش فرض</a>
                                 @elseif($course->status === CourseEnums::Active->value)
                                     <a href="#" wire:click="chengStatusCourse({{$course->id}})"
-                                       class="btn btn-sm btn-secondary me-1 mb-1 mb-md-0">فعال</a>
+                                       class="btn btn-sm btn-success me-1 mb-1 mb-md-0">فعال</a>
                                 @elseif($course->status === CourseEnums::Rejected->value)
                                     <a href="#" wire:click="chengStatusCourse({{$course->id}})"
                                        class="btn btn-sm btn-danger me-1 mb-1 mb-md-0">رد شده</a>

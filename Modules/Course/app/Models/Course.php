@@ -40,6 +40,11 @@ class Course extends Model
         return $this->belongsTo(Category::class , 'category_id' , 'id');
     }
 
+    public function seasons()
+    {
+        return $this->hasMany(Season::class);
+    }
+
     // protected static function newFactory(): CourseFactory
     // {
     //     // return CourseFactory::new();
