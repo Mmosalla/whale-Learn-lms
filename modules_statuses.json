@@ -4,5 +4,6 @@
     "User": true,
     "Category": true,
     "RolePermissions": true,
-    "Course": true
+    "Course": true,
+    "HomePage": true
 }
