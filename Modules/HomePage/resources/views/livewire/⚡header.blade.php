@@ -74,7 +74,7 @@ new class extends Component {
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item bg-primary text-primary bg-opacity-10 rounded-2 mb-0"
-                                   href="#">مشاهده همه</a></li>
+                                   href="{{route('courses')}}">مشاهده همه</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -205,3 +205,5 @@ new class extends Component {
     </nav>
     <!-- Nav END -->
 </header>
+
+{{--//Mohsen was here mmosalla36@gmail.com 😎--}}
