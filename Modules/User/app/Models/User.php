@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Modules\Comments\Models\CourseComment;
 use Modules\Course\Models\Course;
 use Modules\Course\Models\Lesson;
 use Modules\Course\Models\Season;
@@ -51,4 +52,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Lesson::class);
     }
+
+    public function Comments()
+    {
+        return $this->hasMany(CourseComment::class);
+    }
+
+
 }

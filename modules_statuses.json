@@ -6,5 +6,10 @@
     "RolePermissions": true,
     "Course": true,
     "HomePage": true,
-    "CourseListPage": true
+    "CourseListPage": true,
+    "CourseDetailsPage": true,
+    "Comments": true,
+    "CourseComment": true,
+    "DetailPage": true,
+    "DetailCoursePage": true
 }

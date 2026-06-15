@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('description')->nullable();
+            $table->integer('discount')->default(0);
             $table->integer('price')->default(0);
             $table->string('level');
             $table->string('status')->default(\Modules\Course\app\Enums\CourseEnums::Default->value);

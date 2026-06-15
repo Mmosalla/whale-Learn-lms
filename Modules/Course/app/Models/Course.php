@@ -5,7 +5,9 @@ namespace Modules\Course\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Modules\Category\app\Models\Category;
+use Modules\Comments\Models\CourseComment;
 use Modules\User\app\Models\User;
 
 // use Modules\Course\Database\Factories\CourseFactory;
@@ -28,12 +30,14 @@ class Course extends Model
         'status',
         'image',
         'video',
+        'discount',
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class , 'user_id' , 'id');
     }
+
 
     public function category(): BelongsTo
     {
@@ -43,6 +47,28 @@ class Course extends Model
     public function seasons()
     {
         return $this->hasMany(Season::class);
+    }
+
+    public function Comments()
+    {
+        return $this->hasMany(CourseComment::class);
+    }
+
+    public function courseLevelTranslator($level)
+    {
+        switch ($level){
+            case 'professional': return "حرفه ای";
+                break;
+            case 'primary': return "متوسط";
+                break;
+            case 'easy': return "ساده";
+                break;
+        }
+    }
+
+    public function lessons(): HasManyThrough
+    {
+        return $this->hasManyThrough(Lesson::class, Season::class);
     }
 
     // protected static function newFactory(): CourseFactory

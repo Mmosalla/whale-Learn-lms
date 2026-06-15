@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Auth\Http\Controllers\AuthController;
 use Modules\Auth\Http\Controllers\VerifyEmailController;
 use Modules\Auth\Livewire\EmailVerification;
 use Modules\Auth\Livewire\ForgetPassword;

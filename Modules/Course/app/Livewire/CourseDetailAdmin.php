@@ -11,7 +11,7 @@ use Modules\Course\app\Enums\LessonEnums;
 use Modules\Course\Models\Lesson;
 use Modules\Course\Models\Season;
 
-class CourseDetail extends Component
+class CourseDetailAdmin extends Component
 {
     use WithFileUploads;
 

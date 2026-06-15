@@ -15,7 +15,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     // Add Course
     Route::get('/add_course' , AddCourse::class)->name('admin.teacher.add_course`');
    // Add Course Detail
-    Route::get('/add_course_detail/{course_id}' , CourseDetail::class)->name('admin.course_detail');
+    Route::get('/add_course_detail/{course_id}' , \Modules\Course\Livewire\CourseDetailAdmin::class)->name('admin.course_detail');
 
 });
 
