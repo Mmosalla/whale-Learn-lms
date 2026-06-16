@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Modules\Cart\Models\Cart;
 use Modules\Comments\Models\CourseComment;
 use Modules\Course\Models\Course;
 use Modules\Course\Models\Lesson;
@@ -57,6 +58,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(CourseComment::class);
     }
-
-
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

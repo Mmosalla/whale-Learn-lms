@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Modules\Cart\Models\Cart;
 use Modules\Category\app\Models\Category;
 use Modules\Comments\Models\CourseComment;
 use Modules\User\app\Models\User;
@@ -69,6 +70,10 @@ class Course extends Model
     public function lessons(): HasManyThrough
     {
         return $this->hasManyThrough(Lesson::class, Season::class);
+    }
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
     }
 
     // protected static function newFactory(): CourseFactory

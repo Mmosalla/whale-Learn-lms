@@ -138,3 +138,4 @@ class DetailPage extends Component
         return view('detailcoursepage::livewire.detail-page');
     }
 }
+//Mohsen was here mmosalla36@gmail.com😎

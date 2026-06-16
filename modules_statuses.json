@@ -11,5 +11,6 @@
     "Comments": true,
     "CourseComment": true,
     "DetailPage": true,
-    "DetailCoursePage": true
+    "DetailCoursePage": true,
+    "Cart": true
 }

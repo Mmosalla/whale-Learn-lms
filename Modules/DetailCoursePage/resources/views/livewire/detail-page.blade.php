@@ -1272,7 +1272,10 @@
 
 </main>
 
-{{--@assets--}}
-{{--<link rel="stylesheet" href="{{url('assets/vendor/videojs/video-js.css')}}">--}}
-{{--<script src="{{url('assets/vendor/videojs/video.min.js')}}"></script>--}}
-{{--@endassets--}}
+@assets
+<link rel="stylesheet" href="{{url('assets/vendor/videojs/video-js.css')}}">
+<script src="{{url('assets/vendor/videojs/video.min.js')}}"></script>
+@endassets
+
+
+{{--Mohsen was here mmosalla36@gmail.com😎--}}
