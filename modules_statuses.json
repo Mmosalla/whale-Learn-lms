@@ -13,5 +13,6 @@
     "DetailPage": true,
     "DetailCoursePage": true,
     "Cart": true,
-    "Coupon": true
+    "Coupon": true,
+    "Order": true
 }
