@@ -18,6 +18,7 @@ class Coupon extends Model
         'title',
         'coupon_code',
         'coupon_percent',
+        'status',
 
     ];
 

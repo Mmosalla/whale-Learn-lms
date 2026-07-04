@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Coupon\app\Enums\CouponStatus;
 
 return new class extends Migration
 {
@@ -16,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->integer('coupon_code');
             $table->integer('coupon_percent');
+            $table->string('status')->default(CouponStatus::Active->value);
             $table->timestamps();
         });
     }

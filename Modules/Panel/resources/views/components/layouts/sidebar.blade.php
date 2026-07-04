@@ -48,6 +48,10 @@
                     <a  href="{{route('admin.course.comments')}}" class="nav-link active">
                         <i class="bi bi-person fa-fw me-2"></i>کامنت ها</a>
                 </li>
+                <li class="nav-item">
+                    <a  href="{{route('admin.coupons')}}" class="nav-link active">
+                        <i class="bi bi-person fa-fw me-2"></i>تخفیف ها</a>
+                </li>
 
 
             </ul>
