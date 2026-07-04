@@ -9,6 +9,8 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Modules\Cart\Models\Cart;
+use Modules\Coupon\app\Enums\CouponStatus;
+use Modules\Coupon\Models\Coupon;
 
 class Carts extends Component
 {
@@ -22,20 +24,21 @@ class Carts extends Component
 //        $this->alert('success', 'دوره از سبد شما حذف شد');
     }
 
-//    public function checkCoupon(): void
-//    {
-//        if($this->coupon_code){
-//            $coupon = Coupon::query()
-//                ->where('coupon_code', $this->coupon_code)
-//                ->where('status', CouponStatus::Active->value)
-//                ->first();
-//            if($coupon){
-//                $this->coupon_discount = ($this->total_price * $coupon->coupon_percent)/100;
-//            }else{
+    public function checkCoupon(): void
+    {
+        if($this->coupon_code){
+            $coupon = Coupon::query()
+                ->where('coupon_code', $this->coupon_code)
+                ->where('status', CouponStatus::Active->value)
+                ->first();
+            if($coupon){
+                $this->coupon_discount = ($this->total_price * $coupon->coupon_percent)/100;
+            }else{
 //                $this->alert('error', 'کد تخفیف معتبر نمی باشد');
-//            }
-//        }
-//    }
+                $this->dispatch('errorMessage');
+            }
+        }
+    }
 
 //    public function payment()
 //    {
