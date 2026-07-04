@@ -26,3 +26,4 @@ class Coupon extends Model
     //     // return CouponFactory::new();
     // }
 }
+//Mohsen was here mmosalla36@gmail.com 😎
