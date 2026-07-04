@@ -12,5 +12,6 @@
     "CourseComment": true,
     "DetailPage": true,
     "DetailCoursePage": true,
-    "Cart": true
+    "Cart": true,
+    "Coupon": true
 }
